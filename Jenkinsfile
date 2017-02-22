@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Echo') {
       steps {
-        echo 'echo...'
+        echo 'echo branch...'
         retry(count: 3) {
           echo 'bonjour'
         }
