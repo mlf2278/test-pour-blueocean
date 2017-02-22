@@ -15,7 +15,7 @@ pipeline {
             }
           },
           "Echo 2": {
-            sleep '1'
+            sleep 1
           },
           "Echo 3": {
             retry(count: 3) {
