@@ -8,6 +8,7 @@ pipeline {
     }
     stage('Echo') {
       steps {
+        echo 'echo...'
         retry(count: '3') {
           echo 'bonjour'
         }
