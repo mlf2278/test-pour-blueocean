@@ -8,10 +8,26 @@ pipeline {
     }
     stage('Echo') {
       steps {
-        echo 'echo...'
-        retry(count: 3) {
-          echo 'bonjour'
-        }
+        parallel(
+          "Echo": {
+            retry(count: 3) {
+              echo 'bonjour'
+            }
+          },
+          "Echo 2": {
+            sleep '1'
+          },
+          "Echo 3": {
+            retry(count: 3) {
+              echo 'echo 3'
+            }
+          }
+        )
+      }
+    }
+    stage('Tear down') {
+      steps {
+        echo 'done'
       }
     }
   }
