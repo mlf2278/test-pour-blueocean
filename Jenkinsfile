@@ -25,6 +25,11 @@ pipeline {
         )
       }
     }
+    stage('Pause') {
+      steps {
+        input "Tear down?"
+      }
+    }
     stage('Tear down') {
       steps {
         echo 'done'
