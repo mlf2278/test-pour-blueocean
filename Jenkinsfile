@@ -6,33 +6,47 @@ pipeline {
         sh 'printenv'
       }
     }
-    stage('Echo') {
+    stage('Quality Scan') {
+      steps {
+        echo 'sonar'
+      }
+    }
+    stage('Package & Publish') {
+      steps {
+        echo 'pp'
+      }
+    }
+    stage('Deploy to QA') {
       steps {
         parallel(
-          "Echo": {
-            retry(count: 3) {
-              echo 'bonjour'
-            }
+          "Automated Tests": {
+            echo 'qa'
+            
           },
-          "Echo 2": {
-            sleep 1
+          "Performance Tests": {
+            echo 'perf'
+            
           },
-          "Echo 3": {
-            retry(count: 3) {
-              echo 'echo 3'
-            }
+          "Security Tests": {
+            echo 'security'
+            
           }
         )
       }
     }
-    stage('Pause') {
+    stage('Deploy to UAT') {
       steps {
-        input "Tear down?"
+        echo 'tm'
       }
     }
-    stage('Tear down') {
+    stage('Deploy to Preprod') {
       steps {
-        echo 'done'
+        echo 'preprod'
+      }
+    }
+    stage('Deploy to production') {
+      steps {
+        echo 'prod'
       }
     }
   }
